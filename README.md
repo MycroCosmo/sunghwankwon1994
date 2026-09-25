@@ -1,82 +1,60 @@
 # 권성환 | Backend Developer
 
-Java/Spring과 PostgreSQL을 중심으로 백엔드 개발을 하고 있습니다.
-
-단순히 기능을 구현하는 것보다 **SQL 성능, 데이터 정합성, 트랜잭션 경계, 실패 상황과 운영 시점의 예외**를 명확하게 다루는 데 관심이 있습니다.  
-개인 프로젝트에서는 TypeScript/NestJS, Nuxt 3, Flutter 등도 사용하며 서비스 전체 흐름을 직접 구현하고 검증하고 있습니다.
+Java·Spring과 PostgreSQL을 중심으로 백엔드를 개발합니다. SQL 조회 성능, 데이터 정합성, 인증·권한, 실패 처리에 관심이 있습니다. 개인 프로젝트에서는 TypeScript·NestJS와 웹·모바일 클라이언트도 다루고 있습니다.
 
 ## 주요 기술
 
-- **Backend**: Java 17/21, Spring Boot, Spring Security, MyBatis, JPA/Hibernate
-- **Database**: PostgreSQL, SQL
-- **Also**: TypeScript, NestJS, Prisma, Nuxt 3, Flutter
-- **Test**: JUnit, Mockito, Playwright, 회귀 테스트
-- **Infra / Storage**: GCS, Supabase, Vercel
+| 구분 | 사용 기술 |
+| --- | --- |
+| 백엔드 | Java 17/21, Spring Boot, MyBatis, JPA, Spring Security |
+| 데이터베이스 | PostgreSQL, SQL |
+| 프로젝트 확장 | TypeScript, NestJS, Prisma, Nuxt 3, Flutter |
+| 테스트 | JUnit, Mockito, Jest, Playwright |
+| 저장소·서비스 | GCS, Supabase |
 
-## 대표 프로젝트
+## 주요 프로젝트
 
 ### MyBatis Easy Sync Starter
-MyBatis의 SQL 제어권은 유지하면서 반복되는 CRUD와 Mapper/XML 불일치 문제를 줄이기 위해 만든 Java 17 기반 라이브러리입니다.
 
-- 사용자 XML을 자동 생성 SQL보다 우선
-- Runtime CRUD와 Compile-time 검증 분리
-- Annotation Processor로 Mapper/XML 불일치 감지
-- 파괴적인 코드 자동수정을 피하고 개발자 판단을 남기는 방식으로 설계
+기본 CRUD 작성과 Mapper/XML 불일치 확인을 돕는 Java 라이브러리입니다. 사용자 XML을 우선하고 런타임 SQL 병합과 컴파일 시점 검증을 분리했습니다. 설치에 필요한 활성화 설정과 XML 리소스 조건은 저장소 문서에 정리했습니다.
 
-https://github.com/MycroCosmo/mybatis-easy-sync-starter
+[코드와 사용 안내](https://github.com/MycroCosmo/mybatis-easy-sync-starter)
 
-### LOCO | 비공개 프로젝트 Case Study
-Flutter + NestJS + PostgreSQL/Prisma로 재구현한 장소 공유 서비스입니다.
+### LOCO
 
-소스 저장소는 비공개로 유지하되, 인증 상태·권한·지도 조회·실패 처리 설계를 별도 문서로 정리했습니다.
+Flutter·NestJS·PostgreSQL/Prisma로 재구현한 장소 공유 서비스입니다. 조건부 UPDATE를 이용한 리프레시 토큰의 일회 소비, 지도방 권한 구분, 지도 영역별 마커 조회를 다뤘습니다.
 
-- Refresh Token 일회 소비와 동시 요청 처리
-- 회원 상태 변경 시 Session 폐기
-- 공개/비공개 지도방 권한 분리
-- viewport/zoom 기반 Marker 조회
-- DB와 파일 저장소 간 실패 보상 처리
+별도 개선 브랜치에는 탈퇴 계정의 기존 토큰 접근 차단과 트랜잭션 기반 토큰 폐기를 구현했습니다. 해당 브랜치는 GitHub Actions에서 단위 테스트 9개, PostgreSQL API 테스트 6개와 서버 빌드를 통과했습니다. 기본 브랜치·개선 브랜치·실제 배포 상태는 구분해서 관리합니다.
 
-[LOCO 기술 Case Study 보기](./projects/LOCO.md)
+소스는 비공개로 유지하고, 공개 문서에는 설계와 검증 범위를 정리했습니다.
+
+[LOCO 설계·검증 사례](projects/LOCO.md)
 
 ### Dev Blackbox
-AI 코딩 에이전트가 개발 중 발생시킨 오류와 네트워크 실패를 로컬에서 기록하고, 구조화된 incident와 보고서로 남기는 개발 도구입니다.
 
-- CLI 기반 개발 명령 기록
-- 로컬 network collector
-- 실패 incident 중복 제거 및 Markdown 보고서 생성
-- 민감정보 마스킹과 retention 정책
-- MCP 연동 및 agent workflow 지원
+개발 명령과 네트워크 실패를 로컬에서 기록하고 구조화된 오류 기록과 Markdown 보고서로 남기는 도구입니다. 명령 실행 기록, 로컬 수집기, 민감정보 마스킹, 데이터 보존 정책과 MCP 연결을 다룹니다.
 
-https://github.com/MycroCosmo/blackbox
+[저장소](https://github.com/MycroCosmo/blackbox) · [한국어 사용 안내](https://github.com/MycroCosmo/blackbox/blob/main/README.ko.md)
+
+## 실험 프로젝트
 
 ### Meetly
-회원가입 없이 여러 사람이 가능 시간, 장소 투표, 비용 분담을 한 번에 정리할 수 있도록 만든 일정 조율 서비스입니다.
 
-- Nuxt 3 + Supabase PostgreSQL
-- PostgreSQL RLS 기반 권한 제어
-- 30분 단위 일정 겹침 계산
-- TTL 기반 임시 데이터 정리
+Nuxt 3와 Supabase로 시간 조율·장소 선택·비용 분담 흐름을 구현한 프로젝트입니다. 익명 참여 토큰, Edge Functions와 RLS를 다루며, 직접 방 수정·삭제의 권한 제한을 별도 회귀 테스트와 함께 개선하고 있습니다. 전체 운영 권한 체계가 검증 완료된 상태로 소개하지 않습니다.
 
-https://github.com/MycroCosmo/meetly
+[코드와 현재 범위](https://github.com/MycroCosmo/meetly)
 
 ### GameBox
-여러 사용자가 같은 방에서 상태를 공유하는 실시간 파티게임 플랫폼입니다.
 
-- Next.js + Node.js + Socket.io
-- 서버 기준 게임 상태 관리
-- Room / Game phase 모델링
-- 연결 해제·재접속·상태 불일치 문제를 별도 실패 케이스로 처리
+Next.js와 Socket.io 기반 파티게임 프로토타입입니다. 메모리 기반 방 관리와 라이어 제시어 전달을 구현했습니다. 미션 확인·투표 판정은 아직 stub이며, 완성된 게임 서비스나 재시작 복구가 보장되는 시스템은 아닙니다.
 
-https://github.com/MycroCosmo/game-box
+[코드와 구현 범위](https://github.com/MycroCosmo/game-box)
 
-## 개발할 때 중요하게 보는 것
+## 개발 기준
 
-- 병목을 확인한 뒤 최적화할 것
-- 상태 변화와 트랜잭션 경계를 명확하게 둘 것
-- 실패, 재시도, 중복 실행, 권한 문제를 정상적인 설계 대상에 포함할 것
-- 자동화나 AI가 만든 결과도 직접 검증할 수 있는 구조를 만들 것
+문제의 원인과 적용 범위를 먼저 확인하고, 변경은 재현 가능한 테스트로 검증하려고 합니다. 문서에서는 구현된 기능, 테스트한 조건, 남은 제한을 구분합니다.
 
-## Contact
+## 연락처
 
-- Email: sunghwan.ian.kwon@gmail.com
-- GitHub: https://github.com/MycroCosmo
+- 이메일: sunghwan.ian.kwon@gmail.com
+- GitHub: [MycroCosmo](https://github.com/MycroCosmo)
