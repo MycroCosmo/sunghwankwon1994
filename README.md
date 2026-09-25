@@ -1,64 +1,67 @@
-# Kwon Sunghwan
+# 권성환 | Backend Developer
 
-Backend Developer focused on **reliable APIs, SQL performance, data consistency, and failure handling**.
+Java/Spring과 PostgreSQL을 중심으로 백엔드 개발을 하고 있습니다.
 
-I mainly work with Java/Spring and PostgreSQL, and I also build product-oriented side projects with TypeScript/NestJS and Flutter. I prefer to make state transitions and failure cases explicit, then verify them with tests or reproducible scenarios.
+단순히 기능을 구현하는 것보다 **SQL 성능, 데이터 정합성, 트랜잭션 경계, 실패 상황과 운영 시점의 예외**를 명확하게 다루는 데 관심이 있습니다.  
+개인 프로젝트에서는 TypeScript/NestJS, Nuxt 3, Flutter 등도 사용하며 서비스 전체 흐름을 직접 구현하고 검증하고 있습니다.
 
-## Core stack
+## 주요 기술
 
-- **Backend:** Java 17/21, Spring Boot, Spring Security, MyBatis, JPA/Hibernate
-- **Database:** PostgreSQL, SQL tuning
-- **Also used:** TypeScript, NestJS, Prisma, Nuxt 3, Flutter
-- **Testing:** JUnit, Mockito, Playwright, regression testing
-- **Infrastructure / Storage:** GCS, Supabase, Vercel
+- **Backend**: Java 17/21, Spring Boot, Spring Security, MyBatis, JPA/Hibernate
+- **Database**: PostgreSQL, SQL
+- **Also**: TypeScript, NestJS, Prisma, Nuxt 3, Flutter
+- **Test**: JUnit, Mockito, Playwright, 회귀 테스트
+- **Infra / Storage**: GCS, Supabase, Vercel
 
-## Featured work
+## 대표 프로젝트
 
 ### MyBatis Easy Sync Starter
-A Java 17 library for reducing repetitive MyBatis CRUD and Mapper XML work without taking SQL control away from the developer.
+MyBatis의 SQL 제어권은 유지하면서 반복되는 CRUD와 Mapper/XML 불일치 문제를 줄이기 위해 만든 Java 17 기반 라이브러리입니다.
 
-- Runtime CRUD SQL generation while preserving user-defined XML statements
-- Naming strategy and annotation-based table/column mapping
-- Compile-time Mapper/XML consistency checks with an annotation processor
-- Safe generation policy that avoids destructively rewriting existing SQL
+- 사용자 XML을 자동 생성 SQL보다 우선
+- Runtime CRUD와 Compile-time 검증 분리
+- Annotation Processor로 Mapper/XML 불일치 감지
+- 파괴적인 코드 자동수정을 피하고 개발자 판단을 남기는 방식으로 설계
 
-Repository: https://github.com/MycroCosmo/mybatis-easy-sync-starter
+https://github.com/MycroCosmo/mybatis-easy-sync-starter
 
-### LOCO
-A map-based place sharing service rebuilt as a Flutter + NestJS application.
+### Dev Blackbox
+AI 코딩 에이전트가 개발 중 발생시킨 오류와 네트워크 실패를 로컬에서 기록하고, 구조화된 incident와 보고서로 남기는 개발 도구입니다.
 
-- Single-use refresh-token rotation backed by transactional state changes
-- Public/private map membership and authorization rules
-- Cursor-based place queries and viewport/zoom-aware marker retrieval
-- PostgreSQL/Prisma data model with reviews, favorites, invitations, and notifications
+- CLI 기반 개발 명령 기록
+- 로컬 network collector
+- 실패 incident 중복 제거 및 Markdown 보고서 생성
+- 민감정보 마스킹과 retention 정책
+- MCP 연동 및 agent workflow 지원
 
-Repository: https://github.com/MycroCosmo/loco
+https://github.com/MycroCosmo/blackbox
 
 ### Meetly
-A lightweight group scheduling service that combines time availability, place voting, and expense splitting.
+회원가입 없이 여러 사람이 가능 시간, 장소 투표, 비용 분담을 한 번에 정리할 수 있도록 만든 일정 조율 서비스입니다.
 
-- Anonymous participation without mandatory signup
-- PostgreSQL Row Level Security for access control
-- 30-minute availability overlap calculation
-- TTL-based cleanup for temporary meeting data
+- Nuxt 3 + Supabase PostgreSQL
+- PostgreSQL RLS 기반 권한 제어
+- 30분 단위 일정 겹침 계산
+- TTL 기반 임시 데이터 정리
 
-Repository: https://github.com/MycroCosmo/meetly
+https://github.com/MycroCosmo/meetly
 
 ### GameBox
-A real-time party game platform built with Next.js and Socket.io.
+여러 사용자가 같은 방에서 상태를 공유하는 실시간 파티게임 플랫폼입니다.
 
-- Room and game-state synchronization over WebSocket
-- Server-side game engine for phase and role transitions
-- Reconnection and state synchronization treated as explicit failure cases
+- Next.js + Node.js + Socket.io
+- 서버 기준 게임 상태 관리
+- Room / Game phase 모델링
+- 연결 해제·재접속·상태 불일치 문제를 별도 실패 케이스로 처리
 
-Repository: https://github.com/MycroCosmo/game-box
+https://github.com/MycroCosmo/game-box
 
-## Engineering principles
+## 개발할 때 중요하게 보는 것
 
-- Optimize after identifying the actual bottleneck.
-- Prefer explicit transaction and state boundaries over implicit behavior.
-- Treat failure, retry, duplicate execution, and authorization as normal design cases.
-- Keep abstractions small enough that their behavior can be explained and tested.
+- 병목을 확인한 뒤 최적화할 것
+- 상태 변화와 트랜잭션 경계를 명확하게 둘 것
+- 실패, 재시도, 중복 실행, 권한 문제를 정상적인 설계 대상에 포함할 것
+- 자동화나 AI가 만든 결과도 직접 검증할 수 있는 구조를 만들 것
 
 ## Contact
 
