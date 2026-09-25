@@ -25,6 +25,19 @@ MyBatis의 SQL 제어권은 유지하면서 반복되는 CRUD와 Mapper/XML 불�
 
 https://github.com/MycroCosmo/mybatis-easy-sync-starter
 
+### LOCO | 비공개 프로젝트 Case Study
+Flutter + NestJS + PostgreSQL/Prisma로 재구현한 장소 공유 서비스입니다.
+
+소스 저장소는 비공개로 유지하되, 인증 상태·권한·지도 조회·실패 처리 설계를 별도 문서로 정리했습니다.
+
+- Refresh Token 일회 소비와 동시 요청 처리
+- 회원 상태 변경 시 Session 폐기
+- 공개/비공개 지도방 권한 분리
+- viewport/zoom 기반 Marker 조회
+- DB와 파일 저장소 간 실패 보상 처리
+
+[LOCO 기술 Case Study 보기](./projects/LOCO.md)
+
 ### Dev Blackbox
 AI 코딩 에이전트가 개발 중 발생시킨 오류와 네트워크 실패를 로컬에서 기록하고, 구조화된 incident와 보고서로 남기는 개발 도구입니다.
 
